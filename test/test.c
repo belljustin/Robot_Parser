@@ -2,8 +2,11 @@
 #include <check.h>
 
 #include "../src/parse.c"
+#include "../src/syntax.c"
 
 #define MAX_TOKEN_SIZE 80
+
+//PARSE TESTS
 
 START_TEST (test_initBuffer) {
     char *string = "Hello World\r\n";
@@ -38,6 +41,16 @@ START_TEST (test_myRewind) {
 }
 END_TEST
 
+//SYNTAX TESTS
+
+START_TEST (test_isValidCommand) {
+    char *string = "TAKEASTEP\r\n";
+    initBuffer(string);
+    char *token = nextToken();
+    ck_assert(isValidCommand(token));
+}
+END_TEST
+
 Suite *parse_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -64,7 +77,7 @@ Suite *syntax_suite(void) {
 
     tc_core = tcase_create("Core");
 
-    //tcase_add_test(tc_core, test_upperCase);
+    tcase_add_test(tc_core, test_isValidCommand);
 
     suite_add_tcase(s, tc_core);
     
