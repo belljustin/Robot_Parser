@@ -60,6 +60,12 @@ START_TEST (test_isValidCommand) {
 }
 END_TEST
 
+START_TEST (test_isValidExpression) {
+    char *string = "TAKEASTEP\r\n";
+    ck_assert(isValidExpression(string));
+}
+END_TEST
+
 Suite *parse_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -86,8 +92,9 @@ Suite *syntax_suite(void) {
 
     tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, test_isValidCommand);
     tcase_add_test(tc_core, test_upper);
+    tcase_add_test(tc_core, test_isValidCommand);
+    tcase_add_test(tc_core, test_isValidExpression);
 
     suite_add_tcase(s, tc_core);
     
