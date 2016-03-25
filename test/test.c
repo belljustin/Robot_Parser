@@ -26,6 +26,16 @@ START_TEST (test_hasNextToken) {
 }
 END_TEST
 
+START_TEST (test_myRewind) {
+    char *string = "Hello World\r\n";
+    initBuffer(string);
+    nextToken();
+    myRewind();
+    char *token = nextToken();
+    ck_assert_str_eq(token, "Hello");
+}
+END_TEST
+
 Suite *parse_suite(void) {
     Suite *s;
     TCase *tc_core;
