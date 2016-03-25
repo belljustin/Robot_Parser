@@ -1,4 +1,6 @@
 #include <string.h>
+#include <stdio.h>
+
 #include "../include/parse.h"
 
 char *commands[8] = {"TAKEASTEP", "LEFT", "RIGHT", "PICKUP", "DROP",
@@ -23,5 +25,13 @@ int isValidCommand(char *token) {
 
 int isValidExpression(char *expression) {
     initBuffer(expression); 
+     
+    char *token;
+    if (hasNextToken()) {
+        token = nextToken();
+    } else return 0;
+    
+    if (isValidCommand(token)) return 1; 
+    
     return 0;
 }
