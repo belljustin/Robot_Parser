@@ -14,6 +14,8 @@ END_TEST
 START_TEST (test_nextToken) {
     char *string = "Hello World\r\n";
     initBuffer(string);
+    char *token = nextToken();
+    ck_assert_str_eq(token, "Hello");
 }
 END_TEST
 
@@ -26,6 +28,7 @@ Suite *parse_suite(void) {
     tc_core = tcase_create("Core");
 
     tcase_add_test(tc_core, test_initBuffer);
+    tcase_add_test(tc_core, test_nextToken);
 
     suite_add_tcase(s, tc_core);
     
