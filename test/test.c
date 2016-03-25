@@ -19,6 +19,13 @@ START_TEST (test_nextToken) {
 }
 END_TEST
 
+START_TEST (test_hasNextToken) {
+    char *string = "Hello World\r\n";
+    initBuffer(string);
+    ck_assert(hasNextToken());
+}
+END_TEST
+
 Suite *parse_suite(void) {
     Suite *s;
     TCase *tc_core;
