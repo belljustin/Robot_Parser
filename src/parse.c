@@ -19,10 +19,15 @@ char* nextToken() {
         bufferPtr += sizeof(char);
     }
     strncpy(token, startBufferPtr, bufferPtr-startBufferPtr); 
+    bufferPtr += sizeof(char);
     return token;
 }
 
 int hasNextToken() {
     if (*bufferPtr == '\r') return 0;
     return 1;
+}
+
+void myRewind() {
+    bufferPtr = &buffer[0];
 }

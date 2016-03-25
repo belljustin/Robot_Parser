@@ -16,6 +16,8 @@ START_TEST (test_nextToken) {
     initBuffer(string);
     char *token = nextToken();
     ck_assert_str_eq(token, "Hello");
+    token = nextToken();
+    ck_assert_str_eq(token, "World");
 }
 END_TEST
 
@@ -47,6 +49,7 @@ Suite *parse_suite(void) {
     tcase_add_test(tc_core, test_initBuffer);
     tcase_add_test(tc_core, test_nextToken);
     tcase_add_test(tc_core, test_hasNextToken);
+    tcase_add_test(tc_core, test_myRewind);
 
     suite_add_tcase(s, tc_core);
     
