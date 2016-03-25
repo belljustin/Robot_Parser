@@ -36,6 +36,7 @@ Suite *parse_suite(void) {
 
     tcase_add_test(tc_core, test_initBuffer);
     tcase_add_test(tc_core, test_nextToken);
+    tcase_add_test(tc_core, test_hasNextToken);
 
     suite_add_tcase(s, tc_core);
     

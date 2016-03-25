@@ -1,8 +1,10 @@
 #include <string.h>
 #include <stdio.h>
 
+#define BOOLEAN int
 #define BUFFER_SIZE 300
 #define TOKEN_SIZE 80 
+
 
 char buffer[BUFFER_SIZE];
 char *bufferPtr = &buffer[0];
@@ -19,4 +21,9 @@ char* nextToken() {
     }
     strncpy(token, startBufferPtr, bufferPtr-startBufferPtr); 
     return token;
+}
+
+BOOLEAN hasNextToken() {
+    if (*bufferPtr == '\r') return 0;
+    return 1;
 }
