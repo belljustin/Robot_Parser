@@ -43,6 +43,15 @@ END_TEST
 
 //SYNTAX TESTS
 
+START_TEST (test_upper) {
+    char *string = "takeastep\r\n";
+    initBuffer(string);
+    char *token = nextToken();
+    upper(token);
+    ck_assert_str_eq(token, "TAKEASTEP");
+}
+END_TEST
+
 START_TEST (test_isValidCommand) {
     char *string = "TAKEASTEP\r\n";
     initBuffer(string);
@@ -78,6 +87,7 @@ Suite *syntax_suite(void) {
     tc_core = tcase_create("Core");
 
     tcase_add_test(tc_core, test_isValidCommand);
+    tcase_add_test(tc_core, test_upper);
 
     suite_add_tcase(s, tc_core);
     
