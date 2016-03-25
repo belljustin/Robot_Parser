@@ -1,7 +1,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define BOOLEAN int
 #define BUFFER_SIZE 300
 #define TOKEN_SIZE 80 
 
@@ -23,7 +22,7 @@ char* nextToken() {
     return token;
 }
 
-BOOLEAN hasNextToken() {
+int hasNextToken() {
     if (*bufferPtr == '\r') return 0;
     return 1;
 }
