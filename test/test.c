@@ -31,6 +31,14 @@ START_TEST (test_hasNextToken) {
 }
 END_TEST
 
+START_TEST (test_hasNextToken_false) {
+    char *string = "Hello\r\n";
+    initBuffer(string);
+    nextToken();
+    ck_assert(!hasNextToken());
+}
+END_TEST
+
 START_TEST (test_myRewind) {
     char *string = "Hello World\r\n";
     initBuffer(string);
@@ -67,7 +75,7 @@ START_TEST (test_isValidExpression) {
 END_TEST
 
 START_TEST (test_isCommaSeperatedCommands) {
-    char *string = "TAKEASTEP, TAKEASTEP, TAKEASTEP\r\n";
+    char *string = "TAKEASTEP, LEFT, TAKEASTEP END\r\n";
     initBuffer(string);
     ck_assert(isCommaSeperatedCommands());
 }
@@ -84,6 +92,7 @@ Suite *parse_suite(void) {
     tcase_add_test(tc_core, test_initBuffer);
     tcase_add_test(tc_core, test_nextToken);
     tcase_add_test(tc_core, test_hasNextToken);
+    tcase_add_test(tc_core, test_hasNextToken_false);
     tcase_add_test(tc_core, test_myRewind);
 
     suite_add_tcase(s, tc_core);

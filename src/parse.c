@@ -19,7 +19,8 @@ char* nextToken() {
         bufferPtr += sizeof(char);
     }
     strncpy(token, startBufferPtr, bufferPtr-startBufferPtr); 
-    bufferPtr += sizeof(char);
+    token[bufferPtr-startBufferPtr] = '\0';
+    if (*bufferPtr != '\r') bufferPtr += sizeof(char);
     return token;
 }
 
