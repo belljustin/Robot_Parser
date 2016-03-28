@@ -80,6 +80,12 @@ START_TEST (test_isValidExpression_repeat) {
 }
 END_TEST
 
+START_TEST (test_isValidExpression_while) {
+    char *string = "WHILE NOT DETECTMARKER DO TAKEASTEP, LEFT, TAKEASTEP END\r\n";
+    ck_assert(isValidExpression(string));
+}
+END_TEST
+
 START_TEST (test_isCommaSeperatedCommands) {
     char *string = "TAKEASTEP, LEFT, TAKEASTEP END\r\n";
     initBuffer(string);
@@ -126,6 +132,7 @@ Suite *syntax_suite(void) {
     tcase_add_test(tc_core, test_isValidCommand);
     tcase_add_test(tc_core, test_isValidExpression_command);
     tcase_add_test(tc_core, test_isValidExpression_repeat);
+    tcase_add_test(tc_core, test_isValidExpression_while);
     tcase_add_test(tc_core, test_isCommaSeperatedCommands);
     tcase_add_test(tc_core, test_isInteger);
 

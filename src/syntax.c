@@ -79,6 +79,23 @@ int isValidExpression(char *expression) {
     if (isValidCommand(token)) return 1; 
     
     if (strcmp(token, "REPEAT") == 0) return isRepeatStructure();
+
+    if (strcmp(token, "WHILE") == 0) {
+        strcpy(token, nextToken());
+        upper(token);
+        if (strcmp(token, "NOT") != 0) return 0;
+
+        strcpy(token, nextToken());
+        upper(token);
+        if (strcmp(token, "DETECTMARKER") != 0) return 0;
+
+        strcpy(token, nextToken());
+        upper(token);
+        if (strcmp(token, "DO") != 0) return 0;
+    
+        if (isCommaSeperatedCommands()) return 1;
+        return 0;
+    }
     
     return 0;
 }
