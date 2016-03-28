@@ -45,6 +45,13 @@ int isCommaSeperatedCommands() {
     return 1;
 }
 
+int isInteger(char *token) {
+    for (int i=0; i<strlen(token); i++) {
+        if (token[i] < 48 || token[i] > 57) return 0;
+    }
+    return 1;
+}
+
 int isValidExpression(char *expression) {
     initBuffer(expression); 
      
@@ -52,8 +59,13 @@ int isValidExpression(char *expression) {
     if (hasNextToken()) {
         token = nextToken();
     } else return 0;
+    upper(token);
     
     if (isValidCommand(token)) return 1; 
+    
+    if (strcmp(token, "REPEAT")) {
+        
+    }
     
     return 0;
 }
