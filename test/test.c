@@ -87,6 +87,14 @@ START_TEST (test_isCommaSeperatedCommands) {
 }
 END_TEST
 
+START_TEST (test_isInteger) {
+    char *string = "42";
+    ck_assert(isInteger(string));
+    char *string2 = "ab";
+    ck_assert(!isInteger(string2));
+}
+END_TEST
+
 Suite *parse_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -119,6 +127,7 @@ Suite *syntax_suite(void) {
     tcase_add_test(tc_core, test_isValidExpression_command);
     tcase_add_test(tc_core, test_isValidExpression_repeat);
     tcase_add_test(tc_core, test_isCommaSeperatedCommands);
+    tcase_add_test(tc_core, test_isInteger);
 
     suite_add_tcase(s, tc_core);
     
