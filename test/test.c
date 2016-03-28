@@ -86,6 +86,12 @@ START_TEST (test_isValidExpression_while) {
 }
 END_TEST
 
+START_TEST (test_isValidExpression_say) {
+    char *string = "SAY \"Hello World\"\r\n";
+    ck_assert(isValidExpression(string));
+}
+END_TEST
+
 START_TEST (test_isCommaSeperatedCommands) {
     char *string = "TAKEASTEP, LEFT, TAKEASTEP END\r\n";
     initBuffer(string);
@@ -98,6 +104,12 @@ START_TEST (test_isInteger) {
     ck_assert(isInteger(string));
     char *string2 = "ab";
     ck_assert(!isInteger(string2));
+}
+END_TEST
+
+START_TEST (test_isString) {
+    char *string = "\"Hello World\"";
+    ck_assert(isString(string));
 }
 END_TEST
 
@@ -130,11 +142,14 @@ Suite *syntax_suite(void) {
 
     tcase_add_test(tc_core, test_upper);
     tcase_add_test(tc_core, test_isValidCommand);
+    tcase_add_test(tc_core, test_isCommaSeperatedCommands);
+    tcase_add_test(tc_core, test_isInteger);
+    tcase_add_test(tc_core, test_isString);
+
     tcase_add_test(tc_core, test_isValidExpression_command);
     tcase_add_test(tc_core, test_isValidExpression_repeat);
     tcase_add_test(tc_core, test_isValidExpression_while);
-    tcase_add_test(tc_core, test_isCommaSeperatedCommands);
-    tcase_add_test(tc_core, test_isInteger);
+    tcase_add_test(tc_core, test_isValidExpression_say);
 
     suite_add_tcase(s, tc_core);
     
