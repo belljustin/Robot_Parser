@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#define TOKEN_SIZE 80
 #include "../include/parse.h"
 
 char *commands[8] = {"TAKEASTEP", "LEFT", "RIGHT", "PICKUP", "DROP",
@@ -55,16 +56,23 @@ int isInteger(char *token) {
 int isValidExpression(char *expression) {
     initBuffer(expression); 
      
-    char *token;
+    char token[TOKEN_SIZE];
     if (hasNextToken()) {
-        token = nextToken();
+        strcpy(token, nextToken());
     } else return 0;
     upper(token);
     
     if (isValidCommand(token)) return 1; 
     
-    if (strcmp(token, "REPEAT")) {
-        
+    if (strcmp(token, "REPEAT") == 0) {
+        strcpy(token, nextToken());       
+        if (!isInteger(token)) return 0;
+
+        strcpy(token, nextToken());
+        upper(token);
+        if (strcmp(token, "TIMES") != 0) return 0;
+    
+        if (isCommaSeperatedCommands()) return 1;
     }
     
     return 0;
