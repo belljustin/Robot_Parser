@@ -46,11 +46,25 @@ int isCommaSeperatedCommands() {
     return 1;
 }
 
+
 int isInteger(char *token) {
     for (int i=0; i<strlen(token); i++) {
         if (token[i] < 48 || token[i] > 57) return 0;
     }
     return 1;
+}
+
+int isRepeatStructure() {
+    char token[TOKEN_SIZE];
+    strcpy(token, nextToken());       
+    if (!isInteger(token)) return 0;
+
+    strcpy(token, nextToken());
+    upper(token);
+    if (strcmp(token, "TIMES") != 0) return 0;
+
+    if (isCommaSeperatedCommands()) return 1;
+    return 0;
 }
 
 int isValidExpression(char *expression) {
@@ -64,16 +78,7 @@ int isValidExpression(char *expression) {
     
     if (isValidCommand(token)) return 1; 
     
-    if (strcmp(token, "REPEAT") == 0) {
-        strcpy(token, nextToken());       
-        if (!isInteger(token)) return 0;
-
-        strcpy(token, nextToken());
-        upper(token);
-        if (strcmp(token, "TIMES") != 0) return 0;
-    
-        if (isCommaSeperatedCommands()) return 1;
-    }
+    if (strcmp(token, "REPEAT") == 0) return isRepeatStructure();
     
     return 0;
 }
