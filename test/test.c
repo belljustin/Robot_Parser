@@ -21,7 +21,7 @@ START_TEST (test_nextToken) {
     int i = strcmp(token, "Hello");
     token = nextToken();
     i += strcmp(token, "World");
-    ck_assert(i==2);
+    ck_assert(i==0);
 }
 END_TEST
 

@@ -9,10 +9,6 @@ char buffer[BUFFER_SIZE];
 char *bufferPtr = &buffer[0];
 char token[TOKEN_SIZE];
 
-void initBuffer(char *inputLine) {
-    strcpy(buffer, inputLine);
-}
-
 char* nextToken() {
     char *startBufferPtr = bufferPtr;
     while(*bufferPtr != ' ' && *bufferPtr != '\r') {
@@ -31,4 +27,9 @@ int hasNextToken() {
 
 void myRewind() {
     bufferPtr = &buffer[0];
+}
+
+void initBuffer(char *inputLine) {
+    strcpy(buffer, inputLine);
+    myRewind();
 }

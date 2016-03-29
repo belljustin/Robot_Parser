@@ -21,11 +21,17 @@ void reportError(int errorIndex, char *error) {
     for (int i=0; i<errorIndex; i++) {
         printf("%s ", nextToken());
     }
-    printf("***%s ", nextToken());
+
+    if (hasNextToken()) {
+        printf("***%s ", nextToken());
+    } else {
+        printf("*** ");
+    }
+
     while(hasNextToken()) {
         printf("%s ", nextToken());
     }
-    printf("\nError: %s\n", error);
+    printf("\nError: %s, ", error);
 }
 
 int isValidCommand(char *token) {
@@ -90,7 +96,7 @@ int isRepeatStructure() {
     char token[TOKEN_SIZE];
     strcpy(token, nextToken());       
     if (!isInteger(token)) { 
-        reportError(2, "expected an integer value");
+        reportError(1, "expected an integer value");
         return 0;
     }
 
@@ -98,6 +104,7 @@ int isRepeatStructure() {
     upper(token);
     if (strcmp(token, "TIMES") != 0) {
         reportError(2, "expected TIMES");
+        return 0;
     }
 
     int errorIndex = isCommaSeperatedCommands();
@@ -109,9 +116,10 @@ int isRepeatStructure() {
 
 int isWhileStructure() {
     char token[TOKEN_SIZE];
+
     strcpy(token, nextToken());
     upper(token);
-    if (strcmp(token, "NOT") != 0) {
+    if (hasNextToken() && strcmp(token, "NOT") != 0) {
         reportError(1, "expected NOT");
         return 0;
     }
@@ -139,12 +147,11 @@ int isWhileStructure() {
 
 int isValidExpression(char *expression) {
     initBuffer(expression); 
-     
+
     char token[TOKEN_SIZE];
     if (hasNextToken()) {
         strcpy(token, nextToken());
-    }
-
+    } else return 0;
     upper(token);
     
     if (strcmp(token, "REPEAT") == 0) return isRepeatStructure();
