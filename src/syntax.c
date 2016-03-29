@@ -25,7 +25,7 @@ void reportError(int errorIndex, char *error) {
     while(hasNextToken()) {
         printf("%s ", nextToken());
     }
-    printf("\nError: %s ", error);
+    printf("\nError: %s\n", error);
 }
 
 int isValidCommand(char *token) {
@@ -143,7 +143,8 @@ int isValidExpression(char *expression) {
     char token[TOKEN_SIZE];
     if (hasNextToken()) {
         strcpy(token, nextToken());
-    } else return 0;
+    }
+
     upper(token);
     
     if (strcmp(token, "REPEAT") == 0) return isRepeatStructure();

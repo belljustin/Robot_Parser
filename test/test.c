@@ -18,9 +18,10 @@ START_TEST (test_nextToken) {
     char *string = "Hello World\r\n";
     initBuffer(string);
     char *token = nextToken();
-    ck_assert_str_eq(token, "Hello");
+    int i = strcmp(token, "Hello");
     token = nextToken();
-    ck_assert_str_eq(token, "World");
+    i += strcmp(token, "World");
+    ck_assert(i==2);
 }
 END_TEST
 
@@ -115,7 +116,7 @@ START_TEST (test_isString) {
 END_TEST
 
 START_TEST (test_reportError) {
-    char *string = "REPEAT 10 TIMES TAKEASTEP, LEFT, TAKEASTEP END\r\n";
+    char *string = "REPEAT TIMES TAKEASTEP, LEFT, TAKEASTEP END\r\n";
     initBuffer(string);
     reportError(1, "expected an intger\n");
 }
