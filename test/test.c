@@ -95,7 +95,7 @@ END_TEST
 START_TEST (test_isCommaSeperatedCommands) {
     char *string = "TAKEASTEP, LEFT, TAKEASTEP END\r\n";
     initBuffer(string);
-    ck_assert(isCommaSeperatedCommands());
+    ck_assert(!isCommaSeperatedCommands());
 }
 END_TEST
 
@@ -111,6 +111,13 @@ START_TEST (test_isString) {
     char *string = "\"Hello World\"\r\n";
     initBuffer(string);
     ck_assert(isString());
+}
+END_TEST
+
+START_TEST (test_reportError) {
+    char *string = "REPEAT 10 TIMES TAKEASTEP, LEFT, TAKEASTEP END\r\n";
+    initBuffer(string);
+    reportError(1, "expected an intger\n");
 }
 END_TEST
 
@@ -146,6 +153,7 @@ Suite *syntax_suite(void) {
     tcase_add_test(tc_core, test_isCommaSeperatedCommands);
     tcase_add_test(tc_core, test_isInteger);
     tcase_add_test(tc_core, test_isString);
+    tcase_add_test(tc_core, test_reportError);
 
     tcase_add_test(tc_core, test_isValidExpression_command);
     tcase_add_test(tc_core, test_isValidExpression_repeat);
