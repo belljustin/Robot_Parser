@@ -54,6 +54,17 @@ int isInteger(char *token) {
     return 1;
 }
 
+int isString() {
+    char token[TOKEN_SIZE];
+    strcpy(token, nextToken());
+    if (token[0] != '\"') return 0;
+    while (hasNextToken()) {
+        strcpy(token, nextToken());
+    } 
+    if (token[strlen(token)-1] != '\"') return 0;
+    return 1;
+}
+
 int isRepeatStructure() {
     char token[TOKEN_SIZE];
     strcpy(token, nextToken());       
@@ -99,6 +110,8 @@ int isValidExpression(char *expression) {
     if (strcmp(token, "REPEAT") == 0) return isRepeatStructure();
 
     if (strcmp(token, "WHILE") == 0) return isWhileStructure();
+    
+    if (strcmp(token, "SAY") == 0) return isString();
     
     return 0;
 }

@@ -108,8 +108,9 @@ START_TEST (test_isInteger) {
 END_TEST
 
 START_TEST (test_isString) {
-    char *string = "\"Hello World\"";
-    ck_assert(isString(string));
+    char *string = "\"Hello World\"\r\n";
+    initBuffer(string);
+    ck_assert(isString());
 }
 END_TEST
 
